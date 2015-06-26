@@ -3,4 +3,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   root to: 'welcome#index'
+
+  get 'my-counters', to: 'buttons#personal'
+  resources :buttons
 end

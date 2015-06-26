@@ -1,0 +1,26 @@
+<% mybuttons = Button.joins(:user).where({user_id: current_user}) %>
+
+<% if mybuttons.count > 0 %>
+	<ul class="no-bull">
+	<% mybuttons.each do |button| %>
+		<h4>		
+			<li>
+				<div class="del-button pull-left">
+				<%# if policy(mark).destroy? %>
+					<%= link_to "", button, method: :delete, class: 'glyphicon glyphicon-remove-circle red' %>
+				<%# end %>
+				</div>
+
+				<% form_for button do |f| %>
+					<% button.increment!(:hits) %>
+					<%= f.submit "#{button.title}", class: 'btn btn-primary' %>
+				<% end %>
+
+				<div class="hit-count pull-left">
+					<strong><%= button.hits %></strong>
+				</div>
+			</li>
+		</h4>
+	<% end %>
+	</ul>
+<% end %>
